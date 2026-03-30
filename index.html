@@ -6,10 +6,12 @@
 <title>Aman Jaiswal — Full Stack Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ===== LIGHT MODE (DEFAULT) ===== */
 :root {
   --bg: #f0f4f8;
   --surface: #ffffff;
   --surface2: #e8eef5;
+  --surface3: #f8fafc;
   --border: #d1dce8;
   --border2: #c2d0e0;
   --blue: #1d6fea;
@@ -27,7 +29,37 @@
   --shadow-md: 0 4px 16px rgba(15,23,42,0.10), 0 2px 6px rgba(15,23,42,0.06);
   --shadow-lg: 0 12px 40px rgba(15,23,42,0.12), 0 4px 12px rgba(15,23,42,0.08);
   --shadow-blue: 0 8px 32px rgba(29,111,234,0.22);
+  --nav-bg: rgba(240,244,248,0.88);
+  --gradient-start: #1d6fea;
+  --gradient-end: #2563eb;
 }
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+  --bg: #0a0c10;
+  --surface: #12151c;
+  --surface2: #1a1e2a;
+  --surface3: #0f1117;
+  --border: #2a2f3c;
+  --border2: #3a3f4e;
+  --blue: #3b82f6;
+  --blue-mid: #60a5fa;
+  --blue-light: #93c5fd;
+  --blue-pale: #1e2a3e;
+  --slate: #cbd5e1;
+  --slate-mid: #a0abb8;
+  --slate-light: #94a3b8;
+  --slate-pale: #6b7280;
+  --text: #e2e8f0;
+  --heading: #f1f5f9;
+  --white: #1e293b;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-blue: 0 8px 32px rgba(59,130,246,0.25);
+  --nav-bg: rgba(10,12,16,0.92);
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -37,16 +69,47 @@ body {
   font-size: 15px;
   line-height: 1.65;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.2s ease;
 }
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(29,111,234,0.09) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--blue-light) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.08;
+  transition: opacity 0.3s ease;
 }
+[data-theme="dark"] body::before {
+  opacity: 0.03;
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 0.2s ease;
+  margin-left: 1rem;
+}
+.theme-toggle:hover {
+  transform: scale(1.05);
+  border-color: var(--blue);
+  background: var(--blue-pale);
+}
+.theme-toggle .light-icon { display: inline; }
+.theme-toggle .dark-icon { display: none; }
+[data-theme="dark"] .theme-toggle .light-icon { display: none; }
+[data-theme="dark"] .theme-toggle .dark-icon { display: inline; }
 
 /* NAV */
 nav {
@@ -57,10 +120,16 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 3.5rem;
-  height: 64px;
-  background: rgba(240,244,248,0.88);
+  height: 70px;
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .nav-logo { font-weight: 800; font-size: 1.15rem; color: var(--heading); letter-spacing: -0.03em; }
 .nav-logo span { color: var(--blue); }
@@ -92,7 +161,7 @@ nav {
   font-weight: 600 !important;
 }
 .nav-cta::after { display: none !important; }
-.nav-cta:hover { opacity: 0.9; }
+.nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
 
 /* HERO */
 #hero {
@@ -110,6 +179,7 @@ nav {
   align-items: center;
   max-width: 1060px;
   width: 100%;
+  margin: 0 auto;
 }
 .hero-badge {
   display: inline-flex;
@@ -156,9 +226,8 @@ nav {
 .stat-num { font-weight: 800; font-size: 1.3rem; color: var(--blue); line-height: 1; letter-spacing: -0.03em; }
 .stat-lbl { font-size: 0.62rem; color: var(--slate-pale); font-weight: 500; margin-top: 0.15rem; }
 
-/* ── AVATAR ── */
+/* AVATAR — UNCHANGED DIMENSIONS */
 .hero-right { display: flex; flex-direction: column; align-items: center; gap: 0; animation: fadeUp 0.55s 0.12s ease both; }
-
 .avatar-wrapper {
   position: relative;
   width: 230px;
@@ -187,24 +256,16 @@ nav {
   border: 4px solid var(--white);
   box-shadow: var(--shadow-lg), 0 0 0 1px rgba(29,111,234,0.1);
 }
-
-/* ─────────────────────────────────────────
-   REPLACE  "YOUR_PHOTO.jpg"  with your
-   actual image filename or path, e.g.:
-     src="aman.jpg"          (same folder)
-     src="assets/photo.png"  (subfolder)
-     src="https://..."       (URL)
-───────────────────────────────────────── */
 .avatar-circle img {
-  width: 250%;        /* increase zoom */
+  width: 250%;
   height: 250%;
   object-fit: cover;
-  transform: translate(-30%, -25%); /* adjust position */
+  transform: translate(-30%, -25%);
 }
 
-/* SECTION */
+/* SECTIONS */
 .section-wrap { position: relative; z-index: 1; max-width: 1060px; margin: 0 auto; padding: 5rem 3.5rem; }
-.section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.8rem; }
+.section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.8rem; flex-wrap: wrap; }
 .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; background: var(--blue-pale); padding: 0.22rem 0.7rem; border-radius: 4px; white-space: nowrap; }
 .section-title { font-weight: 800; font-size: 1.9rem; color: var(--heading); letter-spacing: -0.03em; white-space: nowrap; }
 .section-rule { flex: 1; height: 1px; background: linear-gradient(to right, var(--border2), transparent); }
@@ -247,7 +308,7 @@ nav {
 .proj-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: rgba(29,111,234,0.3); }
 .proj-card.visible { opacity: 1; transform: translateY(0); }
 .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.proj-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--blue-pale), #bfdbfe); border: 1px solid rgba(29,111,234,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.proj-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--blue-pale), var(--blue-pale)); border: 1px solid rgba(29,111,234,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
 .proj-arrow { color: var(--slate-pale); font-size: 1.2rem; transition: color 0.2s, transform 0.2s; }
 .proj-card:hover .proj-arrow { color: var(--blue); transform: translate(3px,-3px); }
 .proj-name { font-weight: 800; font-size: 1.15rem; color: var(--heading); letter-spacing: -0.02em; margin-bottom: 0.2rem; }
@@ -258,10 +319,10 @@ nav {
 
 /* EDUCATION */
 .edu-card {
-  background: linear-gradient(135deg, #1d6fea 0%, #2563eb 60%, #1e40af 100%);
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 60%, #1e40af 100%);
   border-radius: 18px; padding: 2.4rem;
   display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;
-  box-shadow: 0 16px 56px rgba(29,111,234,0.38);
+  box-shadow: var(--shadow-blue);
   opacity: 0; transform: translateY(18px); transition: all 0.5s; position: relative; overflow: hidden;
 }
 .edu-card::before { content: ''; position: absolute; top: -50px; right: -50px; width: 220px; height: 220px; background: rgba(255,255,255,0.06); border-radius: 50%; }
@@ -269,15 +330,15 @@ nav {
 .edu-card.visible { opacity: 1; transform: translateY(0); }
 .edu-left { position: relative; z-index: 1; }
 .edu-institution { font-weight: 800; font-size: 1.25rem; color: #fff; margin-bottom: 0.3rem; letter-spacing: -0.02em; }
-.edu-degree { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin-bottom: 0.5rem; font-weight: 500; }
+.edu-degree { font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem; font-weight: 500; }
 .edu-meta-row { display: flex; gap: 1rem; align-items: center; }
-.edu-meta-row span { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-family: 'DM Mono', monospace; }
+.edu-meta-row span { font-size: 0.72rem; color: rgba(255,255,255,0.65); font-family: 'DM Mono', monospace; }
 .edu-right { position: relative; z-index: 1; text-align: right; }
 .edu-gpa { font-weight: 800; font-size: 3.8rem; color: #fff; line-height: 1; letter-spacing: -0.04em; }
-.edu-gpa-sub { font-size: 0.7rem; color: rgba(255,255,255,0.6); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
+.edu-gpa-sub { font-size: 0.7rem; color: rgba(255,255,255,0.7); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
 
 /* CONTACT */
-.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
 .contact-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.7rem; display: flex; align-items: center; gap: 1.1rem; text-decoration: none; color: inherit; box-shadow: var(--shadow-sm); transition: all 0.25s; opacity: 0; transform: translateY(14px); }
 .contact-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(29,111,234,0.3); }
 .contact-card.visible { opacity: 1; transform: translateY(0); }
@@ -286,7 +347,7 @@ nav {
 .contact-val { font-size: 0.85rem; font-weight: 500; color: var(--slate); }
 
 /* FOOTER */
-footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--white); }
+footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--surface); transition: background 0.3s ease; }
 footer p { font-size: 0.75rem; color: var(--slate-pale); }
 footer .blue { color: var(--blue); font-weight: 600; }
 
@@ -299,22 +360,47 @@ footer .blue { color: var(--blue); font-weight: 600; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   nav { padding: 0 1.5rem; }
   .nav-links { display: none; }
-  #hero { padding: 6rem 1.5rem 3rem; }
-  .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .theme-toggle { width: 40px; height: 40px; margin-left: 0; }
+  #hero { padding: 6rem 1.5rem 3rem; min-height: auto; }
+  .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .hero-left { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .hero-desc { max-width: 100%; }
+  .hero-stats { justify-content: center; }
+  .hero-actions { justify-content: center; }
   .hero-right { order: -1; }
   .section-wrap { padding: 3rem 1.5rem; }
+  .section-header { flex-wrap: wrap; justify-content: center; text-align: center; }
+  .section-title { white-space: normal; font-size: 1.6rem; }
+  .section-rule { display: none; }
+  .exp-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; }
+  .exp-meta { text-align: left; }
+  .exp-period { display: inline-block; }
+  .edu-card { text-align: center; justify-content: center; }
+  .edu-meta-row { justify-content: center; flex-wrap: wrap; }
+  .edu-right { text-align: center; margin-top: 1rem; }
   .contact-layout { grid-template-columns: 1fr; }
-  footer { padding: 1.5rem; flex-direction: column; }
+  footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .avatar-wrapper { width: 180px; height: 180px; }
+  .hero-name { font-size: clamp(2rem, 8vw, 3rem); }
+  .skill-card { padding: 1.2rem; }
+  .proj-card { padding: 1.5rem; }
+  .btn { padding: 0.6rem 1.2rem; font-size: 0.75rem; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">Aman<span>.</span></div>
+  <div class="nav-left">
+    <div class="nav-logo">Aman<span>.</span></div>
+  </div>
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -322,6 +408,10 @@ footer .blue { color: var(--blue); font-weight: 600; }
     <li><a href="#education">Education</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <span class="light-icon">🌞</span>
+    <span class="dark-icon">🌙</span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -346,14 +436,6 @@ footer .blue { color: var(--blue); font-weight: 600; }
       </div>
     </div>
 
-    <!-- =============================================
-         PHOTO AVATAR
-         Replace  YOUR_PHOTO.jpg  with your image.
-         Examples:
-           src="aman.jpg"           → same folder
-           src="assets/aman.png"    → assets subfolder
-           src="https://i.imgur.com/xyz.jpg" → URL
-         ============================================= -->
     <div class="hero-right">
       <div class="avatar-wrapper">
         <div class="avatar-ring"></div>
@@ -362,7 +444,6 @@ footer .blue { color: var(--blue); font-weight: 600; }
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -441,121 +522,4 @@ footer .blue { color: var(--blue); font-weight: 600; }
         <div class="skill-icon">🤖</div>
         <div class="skill-cat">Specializations</div>
         <div class="skill-tags"><span class="tag">Machine Learning</span><span class="tag">Image Processing</span><span class="tag">Drone Technology</span><span class="tag">AI Integration</span><span class="tag">ERP Systems</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-wrap" style="padding-top:0;">
-    <div class="section-header">
-      <span class="section-eyebrow">03 · Projects</span>
-      <h2 class="section-title">What I've Built</h2>
-      <div class="section-rule"></div>
-    </div>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-top"><div class="proj-icon">🚗</div><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">V-Count</div>
-        <div class="proj-sub">Traffic Intelligence System</div>
-        <p class="proj-desc">End-to-end web application for real-time traffic car detection and counting. Integrates ML-based image processing to analyze live traffic feeds and provide accurate vehicle counts through an intuitive web interface.</p>
-        <div class="proj-stack"><span class="stack-tag">Python</span><span class="stack-tag">Computer Vision</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Node.js</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top"><div class="proj-icon">🏡</div><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">TravelMate</div>
-        <div class="proj-sub">Short-Term Stay Booking</div>
-        <p class="proj-desc">Full-stack web application enabling users to browse, book, and manage short-term stays with secure payments and fully responsive design. Built with the MERN stack for a seamless end-to-end experience.</p>
-        <div class="proj-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Node.js</span><span class="stack-tag">Express.js</span><span class="stack-tag">MongoDB</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-wrap" style="padding-top:0;">
-    <div class="section-header">
-      <span class="section-eyebrow">04 · Education</span>
-      <h2 class="section-title">Academic Background</h2>
-      <div class="section-rule"></div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-left">
-        <div class="edu-institution">Bhilai Institute of Technology Durg</div>
-        <div class="edu-degree">B.Tech — Artificial Intelligence</div>
-        <div class="edu-meta-row">
-          <span>📍 Durg, Chhattisgarh</span>
-          <span>·</span>
-          <span>2022 – 2026</span>
-        </div>
-      </div>
-      <div class="edu-right">
-        <div class="edu-gpa">8.1</div>
-        <div class="edu-gpa-sub">GPA / 10.0</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-wrap" style="padding-top:0;">
-    <div class="section-header">
-      <span class="section-eyebrow">05 · Contact</span>
-      <h2 class="section-title">Get in Touch</h2>
-      <div class="section-rule"></div>
-    </div>
-    <div class="contact-layout">
-      <a href="tel:6265324553" class="contact-card">
-        <div class="contact-ico">📞</div>
-        <div><div class="contact-lbl">Phone</div><div class="contact-val">+91 62653 24553</div></div>
-      </a>
-      <a href="mailto:jaiswalaman9424@gmail.com" class="contact-card">
-        <div class="contact-ico">✉️</div>
-        <div><div class="contact-lbl">Email</div><div class="contact-val">jaiswalaman9424@gmail.com</div></div>
-      </a>
-      <a href="#" class="contact-card">
-        <div class="contact-ico">💼</div>
-        <div><div class="contact-lbl">LinkedIn</div><div class="contact-val">Aman Jaiswal</div></div>
-      </a>
-      <div class="contact-card" style="cursor:default;">
-        <div class="contact-ico">📍</div>
-        <div><div class="contact-lbl">Location</div><div class="contact-val">Dallirajhara, Chhattisgarh</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 <span class="blue">Aman Jaiswal</span> — Full Stack Developer</p>
-  <p>Crafted with HTML · CSS · JavaScript</p>
-</footer>
-
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(el => {
-    if (el.isIntersecting) setTimeout(() => el.target.classList.add('visible'), +el.target.dataset.delay || 0);
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.exp-card, .skill-card, .proj-card, .edu-card, .contact-card').forEach((el, i) => {
-  el.dataset.delay = (i % 4) * 90;
-  observer.observe(el);
-});
-
-// Badge rotation
-const badgeText = document.getElementById('badgeText');
-const badge = badgeText.closest('.hero-badge');
-const statuses = ['Open to Opportunities', 'Available for Internships', 'Building Cool Things'];
-let si = 0;
-setInterval(() => {
-  si = (si + 1) % statuses.length;
-  badge.style.transition = 'opacity 0.3s';
-  badge.style.opacity = 0;
-  setTimeout(() => { badgeText.textContent = statuses[si]; badge.style.opacity = 1; }, 300);
-}, 3500);
-</script>
-</body>
-</html>
+     
