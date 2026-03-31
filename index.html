@@ -627,15 +627,34 @@ footer .blue { color: var(--blue); font-weight: 600; }
     <div class="proj-name">GuardianEye</div>
     <div class="proj-sub">AI-Powered Surveillance System</div>
 
-    <p class="proj-desc">
-      AI-powered real-time monitoring system that detects fire hazards 
-      and road accidents from video streams and triggers instant alerts.
-    </p>
+ <p class="proj-desc">
+  <strong>GuardianEye</strong> is an AI-powered real-time surveillance system designed to detect 
+  fire hazards and road accidents from video streams and trigger immediate alerts, helping 
+  reduce response time and potential damage in critical situations.
+</p>
 
-    <p class="proj-desc">
-      Supports CCTV, drone feeds, and uploaded videos using computer 
-      vision models for fire, smoke, and accident detection.
-    </p>
+<p class="proj-desc">
+  The system processes both live and recorded video feeds including CCTV cameras, drone streams, 
+  and uploaded media. Using computer vision and deep learning models, it identifies fire, smoke, 
+  and accident events and further classifies incidents based on severity (minor vs critical).
+</p>
+
+<p class="proj-desc">
+  The platform is built as a full-stack web application with a responsive monitoring dashboard. 
+  The frontend is deployed on Vercel, the backend runs on Render handling APIs and alert systems, 
+  and MongoDB Atlas is used for storing logs, alerts, and metadata.
+</p>
+
+<p class="proj-desc">
+  Due to high computational requirements, the AI model runs locally and communicates with the 
+  backend via REST APIs for real-time inference, ensuring efficient and scalable processing.
+</p>
+
+<p class="proj-desc">
+  <strong>Key Impact:</strong> This system enables early detection of dangerous events, reduces 
+  emergency response time, and can be extended for applications in smart cities, industrial safety, 
+  and disaster management systems.
+</p>
 
     <!-- 🔘 BUTTONS -->
     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
@@ -644,9 +663,7 @@ footer .blue { color: var(--blue); font-weight: 600; }
         🚀 Live Project
       </a>
 
-      <a href="assets/demo.mp4.mp4" target="_blank" class="btn btn-outline">
-        🎥 Watch Video
-      </a>
+      
 
     </div>
 
