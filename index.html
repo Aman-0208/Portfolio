@@ -343,7 +343,13 @@ nav {
 
 /* ── PROJECTS ── */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.4rem; }
-.proj-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: clamp(1.4rem, 3vw, 2rem); box-shadow: var(--shadow-sm); transition: all 0.3s, background 0.35s, border-color 0.35s; opacity: 0; transform: translateY(18px); display: flex; flex-direction: column; }
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem;
+  max-width: 520px;
+  margin: 0 auto;}
 .proj-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: rgba(59,130,246,0.3); }
 .proj-card.visible { opacity: 1; transform: translateY(0); }
 .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
@@ -615,10 +621,10 @@ footer .blue { color: var(--blue); font-weight: 600; }
   <div class="proj-card">
 
     <!-- 🎥 VIDEO -->
-    <video controls 
-      style="width:100%; border-radius:12px; margin-bottom:14px;">
-      <source src="assets/demo.mp4.mp4" type="video/mp4">
-    </video>
+<video controls 
+  style="width:100%; height:260px; object-fit:cover; border-radius:12px; margin-bottom:10px;">
+  <source src="assets/demo.mp4" type="video/mp4">
+</video>
 
     <div class="proj-top">
       <div class="proj-icon">🔥</div>
@@ -628,32 +634,7 @@ footer .blue { color: var(--blue); font-weight: 600; }
     <div class="proj-sub">AI-Powered Surveillance System</div>
 
  <p class="proj-desc">
-  <strong>GuardianEye</strong> is an AI-powered real-time surveillance system designed to detect 
-  fire hazards and road accidents from video streams and trigger immediate alerts, helping 
-  reduce response time and potential damage in critical situations.
-</p>
-
-<p class="proj-desc">
-  The system processes both live and recorded video feeds including CCTV cameras, drone streams, 
-  and uploaded media. Using computer vision and deep learning models, it identifies fire, smoke, 
-  and accident events and further classifies incidents based on severity (minor vs critical).
-</p>
-
-<p class="proj-desc">
-  The platform is built as a full-stack web application with a responsive monitoring dashboard. 
-  The frontend is deployed on Vercel, the backend runs on Render handling APIs and alert systems, 
-  and MongoDB Atlas is used for storing logs, alerts, and metadata.
-</p>
-
-<p class="proj-desc">
-  Due to high computational requirements, the AI model runs locally and communicates with the 
-  backend via REST APIs for real-time inference, ensuring efficient and scalable processing.
-</p>
-
-<p class="proj-desc">
-  <strong>Key Impact:</strong> This system enables early detection of dangerous events, reduces 
-  emergency response time, and can be extended for applications in smart cities, industrial safety, 
-  and disaster management systems.
+  GuardianEye is an AI-powered real-time surveillance system built to detect fire hazards and road accidents from live CCTV feeds, drone streams, and uploaded videos. The system leverages computer vision and deep learning models to identify fire, smoke, and accident events while also classifying their severity to enable faster and more effective response. It is developed as a full-stack application using the MERN stack, with a responsive web dashboard for monitoring, a backend handling alerts and data flow, and MongoDB for storing logs and metadata. Due to high computational requirements, the AI inference service is currently run locally and integrated with the backend via APIs. Designed with real-world applications in mind, GuardianEye aims to reduce emergency response time and can be extended for smart cities, industrial safety, and disaster management systems.
 </p>
 
     <!-- 🔘 BUTTONS -->
