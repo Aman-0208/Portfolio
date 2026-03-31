@@ -65,6 +65,14 @@
   --footer-bg:    #0f1623;
 }
 
+video {
+  transition: 0.3s;
+}
+
+video:hover {
+  transform: scale(1.02);
+}
+
 /* ══════════════════════════════════════
    BASE
 ══════════════════════════════════════ */
@@ -491,7 +499,7 @@ footer .blue { color: var(--blue); font-weight: 600; }
       <div class="hero-stats">
         <div class="stat-chip"><div class="stat-num">8.1</div><div class="stat-lbl">GPA</div></div>
         <div class="stat-chip"><div class="stat-num">2+</div><div class="stat-lbl">Internships</div></div>
-        <div class="stat-chip"><div class="stat-num">2</div><div class="stat-lbl">Projects</div></div>
+        <div class="stat-chip"><div class="stat-num">1</div><div class="stat-lbl">Flagship Projects</div></div>
       </div>
     </div>
 
@@ -602,22 +610,59 @@ footer .blue { color: var(--blue); font-weight: 600; }
       <h2 class="section-title">What I've Built</h2>
       <div class="section-rule"></div>
     </div>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-top"><div class="proj-icon">🚗</div><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">V-Count</div>
-        <div class="proj-sub">Traffic Intelligence System</div>
-        <p class="proj-desc">End-to-end web application for real-time traffic car detection and counting. Integrates ML-based image processing to analyze live traffic feeds and provide accurate vehicle counts through an intuitive web interface.</p>
-        <div class="proj-stack"><span class="stack-tag">Python</span><span class="stack-tag">Computer Vision</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Node.js</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top"><div class="proj-icon">🏡</div><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">TravelMate</div>
-        <div class="proj-sub">Short-Term Stay Booking</div>
-        <p class="proj-desc">Full-stack web application enabling users to browse, book, and manage short-term stays with secure payments and fully responsive design. Built with the MERN stack for a seamless end-to-end experience.</p>
-        <div class="proj-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Node.js</span><span class="stack-tag">Express.js</span><span class="stack-tag">MongoDB</span></div>
-      </div>
+<div class="projects-grid">
+
+  <div class="proj-card">
+
+    <!-- 🎥 VIDEO -->
+    <video controls 
+      style="width:100%; border-radius:12px; margin-bottom:14px;">
+      <source src="assets/demo.mp4" type="video/mp4">
+    </video>
+
+    <div class="proj-top">
+      <div class="proj-icon">🔥</div>
     </div>
+
+    <div class="proj-name">GuardianEye</div>
+    <div class="proj-sub">AI-Powered Surveillance System</div>
+
+    <p class="proj-desc">
+      AI-powered real-time monitoring system that detects fire hazards 
+      and road accidents from video streams and triggers instant alerts.
+    </p>
+
+    <p class="proj-desc">
+      Supports CCTV, drone feeds, and uploaded videos using computer 
+      vision models for fire, smoke, and accident detection.
+    </p>
+
+    <!-- 🔘 BUTTONS -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+      
+      <a href="https://gurdianeye.vercel.app/" target="_blank" class="btn btn-primary">
+        🚀 Live Project
+      </a>
+
+      <a href="assets/demo.mp4" target="_blank" class="btn btn-outline">
+        🎥 Watch Video
+      </a>
+
+    </div>
+
+    <!-- 🧠 TECH -->
+    <div class="proj-stack" style="margin-top:14px;">
+      <span class="stack-tag">MERN</span>
+      <span class="stack-tag">AI/ML</span>
+      <span class="stack-tag">Computer Vision</span>
+      <span class="stack-tag">MongoDB Atlas</span>
+      <span class="stack-tag">Render</span>
+      <span class="stack-tag">Vercel</span>
+    </div>
+
+  </div>
+
+</div>
   </div>
 </section>
 
@@ -664,7 +709,7 @@ footer .blue { color: var(--blue); font-weight: 600; }
         <div class="contact-ico">✉️</div>
         <div><div class="contact-lbl">Email</div><div class="contact-val">jaiswalaman9424@gmail.com</div></div>
       </a>
-      <a href="#" class="contact-card">
+      <a href="https://www.linkedin.com/in/aman-jaiswal-87b78b220/" class="contact-card">
         <div class="contact-ico">💼</div>
         <div><div class="contact-lbl">LinkedIn</div><div class="contact-val">Aman Jaiswal</div></div>
       </a>
